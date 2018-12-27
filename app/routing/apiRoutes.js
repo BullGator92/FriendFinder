@@ -12,22 +12,19 @@ module.exports = function apiRoutes(app) {
   // Below code handles when a user submits a form and thus submits data to the server.
 
   app.post("/api/friends", function(req, res) {
-    app.post("/api/friends", function(req, res) {
-        // matchedFriendInfo variable is set equal to what is being returned in the next function because 
-        // will be displayed in the modal
-        var matchFriendInfo = bestMatch(friends, req.body);
-        // pushes the new friend to the array
-        friends.push(req.body);
-        // the information that displays in the modal for the matched friend
-        res.json(matchFriendInfo);
+    // matchedFriendInfo variable is set equal to what is being returned in the next function because 
+    // will be displayed in the modal
+    var matchFriendInfo = bestMatch(friends, req.body);
+    // pushes the new friend to the array
+    friends.push(req.body);
+    // the information that displays in the modal for the matched friend
+    res.json(matchFriendInfo);
 
-    });
-    
-  });
+});
 
   function bestMatch(friends, newFriend) {
     // initialize a variable to find the closest difference between a person in the friends array to a person in the newFriend array
-    var closestDifference;
+    var closestDifference = 50;
     // initialize a variable to match the user inputed answers from the newFriend array to a person in the friend array
     var matchFriend;
     // for loop to iterate through the current friends array
@@ -46,18 +43,17 @@ module.exports = function apiRoutes(app) {
             difference = difference + (Math.abs(answerA - answerB));
         }
         // if the result of that difference is less than closestDifference OR closestDifference returns undefined
-        if (difference < closestDifference || closestDifference === undefined) {
+        if (difference < closestDifference) {
             // then closest match is the friend with the least amount of difference, 
             closestDifference = difference;
             // matchFriend is set equal to friend
             matchFriend = friend;
         }
-        return {
-            // information from the matched Friend that will display in the modal
-            name: matchFriend.name,
-        photo: matchFriend.photo
-
-        };
     }
-}
+    return {
+        // information from the matched Friend that will display in the modal
+        name: matchFriend.name,
+    photo: matchFriend.photo
+    };
+  }
 }

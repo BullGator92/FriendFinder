@@ -194,7 +194,7 @@
         // run a for loop to loop over the scoresArray
         for (var i = 0; i < scoresArray.length; i++) {
             // if the user has not selected an answer for each index
-            if (!scoresArray[i]) {
+            if (!scoresArray[i]|| scoresArray[i] === 'S') {
                 // the variable formIsValid is false
                 formIsValid = false;
             }
